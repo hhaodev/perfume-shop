@@ -27,4 +27,8 @@ const getCurrentUser = async (data) =>{
     const result = await UserModel.getCurrentUser(data)
     return result
 }
-export const userService = { createNew , loginUser, getCurrentUser}
+const changePassWord = async (password) => {
+    const result = await UserModel.changePassWord(password)
+    return result
+}
+export const userService = { createNew , loginUser, getCurrentUser, changePassWord}

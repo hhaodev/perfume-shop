@@ -49,4 +49,15 @@ const getCurrentUser = async (userId) =>{
     }
     
 }
-export const UserModel = { createNew , loginUser, getCurrentUser }
+const changePassWord = async (data) => {
+    try {
+        const result = await getDB().collection(UserCollectionName).updateOne(
+            { "email": data.email}, // Filter
+            {$set: {"password": data.password}} // Update
+        )
+        return result
+    } catch (error) {
+        throw new Error(error)
+    }
+}
+export const UserModel = { createNew , loginUser, getCurrentUser, changePassWord }

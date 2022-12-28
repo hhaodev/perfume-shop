@@ -11,12 +11,12 @@ const getProducts = async () => {
 
 const getProductSingle = async (idProduct) => {
   try {
-    const result = await productModel.getProductSingle(idProduct)
-    return result
+    const result = await productModel.getProductSingle(idProduct);
+    return result;
   } catch (error) {
-    throw new Error(error)
+    throw new Error(error);
   }
-}
+};
 
 const getProdutcsById = async (data) => {
   try {
@@ -26,5 +26,17 @@ const getProdutcsById = async (data) => {
     throw new Error(error);
   }
 };
-export const productService = { getProducts, getProductSingle, getProdutcsById };
-
+const getSearchProduct = async (data) => {
+  try {
+    const result = await productModel.getSearchProduct(data);
+    return result;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+export const productService = {
+  getProducts,
+  getProductSingle,
+  getProdutcsById,
+  getSearchProduct,
+};

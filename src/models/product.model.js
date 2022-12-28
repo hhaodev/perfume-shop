@@ -29,26 +29,55 @@ const getProductSingle = async (idProduct) => {
 
 const getProdutcsById = async (listId) => {
   try {
-    const listIdProduct = listId.map((product) => {
-      return ObjectId(product._id);
-    });
-    let updateProduct = listId.map((product) => {
-      return {
-        updateOne: {
-          filter: { _id: ObjectId(product._id) },
-          update: { $set: { quantity: product.quantity } },
-        },
-      };
-    });
-    await getDB().collection(ProductCollectionName).bulkWrite(updateProduct);
+    if (listId.length > 0) {
+      const listIdProduct = listId.map((product) => {
+        return ObjectId(product._id);
+      });
+      let updateProduct = listId.map((product) => {
+        return {
+          updateOne: {
+            filter: { _id: ObjectId(product._id) },
+            update: { $set: { quantity: product.quantity } },
+          },
+        };
+      });
+      await getDB().collection(ProductCollectionName).bulkWrite(updateProduct);
+      const result = await getDB()
+        .collection(ProductCollectionName)
+        .find({ _id: { $in: listIdProduct } })
+        .toArray();
+      return result;
+    } else {
+      const listIdProduct = listId.map((product) => {
+        return ObjectId(product._id);
+      });
+      const result = await getDB()
+        .collection(ProductCollectionName)
+        .find({ _id: { $in: listIdProduct } })
+        .toArray();
+      return result;
+    }
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+const getSearchProduct = async (textSearch) => {
+  try {
+    await getDB()
+      .collection(ProductCollectionName)
+      .createIndex({ name: "text", desc: "text" });
     const result = await getDB()
       .collection(ProductCollectionName)
-      .find({ _id: { $in: listIdProduct } })
-      .toArray();
-
+      .find({ $text: { $search: textSearch } });
     return result;
   } catch (error) {
     throw new Error(error);
   }
 };
-export const productModel = { getProducts, getProductSingle, getProdutcsById };
+export const productModel = {
+  getProducts,
+  getProductSingle,
+  getProdutcsById,
+  getSearchProduct,
+};

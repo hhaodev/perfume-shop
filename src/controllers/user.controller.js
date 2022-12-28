@@ -76,4 +76,26 @@ const getCurrentUser = async (req, res) => {
     });
   }
 };
-export const UserController = { createNewUser, login, getCurrentUser };
+
+const changePassWord = async (req, res) => {
+  try {
+    const result = await userService.changePassWord(req.body);
+    res.status(HttpStatusCode.OK).json({
+      status: "success",
+      data: {
+        result,
+      },
+    });
+  } catch (error) {
+    res.status(HttpStatusCode.BAD_REQUEST).json({
+      status: "error",
+      data: error,
+    });
+  }
+};
+export const UserController = {
+  createNewUser,
+  login,
+  getCurrentUser,
+  changePassWord,
+};
