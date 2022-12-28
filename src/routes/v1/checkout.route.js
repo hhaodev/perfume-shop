@@ -1,10 +1,11 @@
-import express from "express";
-import { checkoutController } from "../../controllers/checkout.controller.js";
+import express from 'express';
+import { checkoutController } from '../../controllers/checkout.controller.js';
 const router = express.Router();
 
 router
-  .route("/checkout")
+  .route('/checkout')
   .post(checkoutController.checkout)
-  .get(checkoutController.getCheckout);
+  .get(checkoutController.getCheckout)
+  .put(checkoutController.updateCheckout);
 
 export const checkoutRoute = router;

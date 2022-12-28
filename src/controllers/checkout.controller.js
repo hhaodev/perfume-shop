@@ -1,5 +1,5 @@
-import { checkoutService } from "../services/checkout.service.js";
-import { HttpStatusCode } from "../utilities/constants.js";
+import { checkoutService } from '../services/checkout.service.js';
+import { HttpStatusCode } from '../utilities/constants.js';
 
 const checkout = async (req, res) => {
   try {
@@ -26,4 +26,17 @@ const getCheckout = async (req, res) => {
     });
   }
 };
-export const checkoutController = { checkout, getCheckout };
+
+const updateCheckout = async (req, res) => {
+  try {
+    const result = await checkoutService.updateCheckout(req.body);
+    res.status(HttpStatusCode.OK).json({
+      data: result,
+    });
+  } catch (error) {
+    res.status(HttpStatusCode.BAD_REQUEST).json({
+      data: error,
+    });
+  }
+};
+export const checkoutController = { checkout, getCheckout, updateCheckout };

@@ -1,7 +1,9 @@
-import { getDB } from "../config/mongodb.js";
-import mongoose from "mongoose";
-import Joi from "joi";
-const ProductCollectionName = "checkout";
+import { getDB } from '../config/mongodb.js';
+import { ObjectId } from 'mongodb';
+import mongoose from 'mongoose';
+import Joi from 'joi';
+
+const ProductCollectionName = 'checkout';
 const CheckoutCollectionSchema = Joi.object({
   fName: Joi.string(),
   lName: Joi.string(),
@@ -40,7 +42,22 @@ const getCheckout = async () => {
     throw new Error(error);
   }
 };
+const updateCheckout = async (data) => {
+  try {
+    const {_id, ...rest} = data
+    const result = await getDB()
+      .collection(ProductCollectionName)
+      .updateOne(
+        { _id: ObjectId(_id) }, // Filter
+        { $set: rest } // Update
+      );
+    return result;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
 export const checkoutModel = {
   checkout,
   getCheckout,
+  updateCheckout,
 };

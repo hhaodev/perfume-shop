@@ -1,4 +1,4 @@
-import { checkoutModel } from "../models/checkout.model.js";
+import { checkoutModel } from '../models/checkout.model.js';
 
 const checkout = async (checkout) => {
   try {
@@ -17,4 +17,13 @@ const getCheckout = async () => {
   }
 };
 
-export const checkoutService = { checkout, getCheckout };
+const updateCheckout = async (data) => {
+  try {
+    const result = await checkoutModel.updateCheckout(data);
+    return result;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+export const checkoutService = { checkout, getCheckout, updateCheckout };
