@@ -23,7 +23,7 @@ const bootServer = () => {
   app.use("/api/v1/auth", UserRoutes); // user route
   app.use("/api/v1", ProductRoute); // product route
   app.use("/api/v1", checkoutRoute);
-  app.use("/api/v1", orderRoute);
+  // app.use("/api/v1", orderRoute);
   app.listen(env.APP_PORT, env.APP_LOCALHOST, () => {
     console.log(
       `Hello anhdev, I'm running at ${env.APP_LOCALHOST} : ${env.APP_PORT}/`
