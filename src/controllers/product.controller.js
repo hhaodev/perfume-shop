@@ -1,5 +1,5 @@
-import { productService } from "../services/product.service.js";
-import { HttpStatusCode } from "../utilities/constants.js";
+import { productService } from '../services/product.service.js';
+import { HttpStatusCode } from '../utilities/constants.js';
 
 const getProducts = async (req, res) => {
   try {
@@ -49,7 +49,20 @@ const getSearchProduct = async (req, res) => {
     });
   } catch (error) {
     res.status(HttpStatusCode.BAD_REQUEST).json({
-      data: "error",
+      data: 'error',
+    });
+  }
+};
+
+const createProduct = async (req, res) => {
+  try {
+    const result = productService.createProduct(req.body);
+    res.status(HttpStatusCode.OK).json({
+      data: result,
+    });
+  } catch (error) {
+    res.status(HttpStatusCode.BAD_REQUEST).json({
+      data: 'error',
     });
   }
 };
@@ -58,4 +71,5 @@ export const productController = {
   getProductSingle,
   getProdutcsById,
   getSearchProduct,
+  createProduct,
 };

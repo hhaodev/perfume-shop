@@ -1,4 +1,4 @@
-import { productModel } from "../models/product.model.js";
+import { productModel } from '../models/product.model.js';
 
 const getProducts = async () => {
   try {
@@ -34,9 +34,20 @@ const getSearchProduct = async (data) => {
     throw new Error(error);
   }
 };
+
+const createProduct = (data) => {
+  try {
+    const result = productModel.createProduct(data);
+    return result;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
 export const productService = {
   getProducts,
   getProductSingle,
   getProdutcsById,
   getSearchProduct,
+  createProduct,
 };
