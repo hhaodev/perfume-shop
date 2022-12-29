@@ -1,4 +1,4 @@
-import { checkoutModel } from '../models/checkout.model.js';
+import { checkoutModel } from "../models/checkout.model.js";
 
 const checkout = async (checkout) => {
   try {
@@ -16,7 +16,22 @@ const getCheckout = async () => {
     throw new Error(error);
   }
 };
-
+const getCheckoutUser = async (userId) => {
+  try {
+    const result = await checkoutModel.getCheckoutUser(userId);
+    return result;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+const getCheckoutbyId = async (id) => {
+  try {
+    const result = await checkoutModel.getCheckoutbyId(id);
+    return result;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
 const updateCheckout = async (data) => {
   try {
     const result = await checkoutModel.updateCheckout(data);
@@ -26,4 +41,10 @@ const updateCheckout = async (data) => {
   }
 };
 
-export const checkoutService = { checkout, getCheckout, updateCheckout };
+export const checkoutService = {
+  checkout,
+  getCheckout,
+  updateCheckout,
+  getCheckoutUser,
+  getCheckoutbyId
+};

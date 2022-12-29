@@ -1,5 +1,5 @@
-import { checkoutService } from '../services/checkout.service.js';
-import { HttpStatusCode } from '../utilities/constants.js';
+import { checkoutService } from "../services/checkout.service.js";
+import { HttpStatusCode } from "../utilities/constants.js";
 
 const checkout = async (req, res) => {
   try {
@@ -26,7 +26,31 @@ const getCheckout = async (req, res) => {
     });
   }
 };
-
+const getCheckoutUser = async (req, res) => {
+  try {
+    const userId = req.user;
+    const result = await checkoutService.getCheckoutUser(userId);
+    res.status(HttpStatusCode.OK).json({
+      data: result,
+    });
+  } catch (error) {
+    res.status(HttpStatusCode.BAD_REQUEST).json({
+      data: error,
+    });
+  }
+};
+const getCheckoutbyId = async (req, res) => {
+  try {
+    const result = await checkoutService.getCheckoutbyId(req.params.id);
+    res.status(HttpStatusCode.OK).json({
+      data: result,
+    });
+  } catch (error) {
+    res.status(HttpStatusCode.BAD_REQUEST).json({
+      data: error,
+    });
+  }
+};
 const updateCheckout = async (req, res) => {
   try {
     const result = await checkoutService.updateCheckout(req.body);
@@ -39,4 +63,10 @@ const updateCheckout = async (req, res) => {
     });
   }
 };
-export const checkoutController = { checkout, getCheckout, updateCheckout };
+export const checkoutController = {
+  checkout,
+  getCheckout,
+  getCheckoutUser,
+  updateCheckout,
+  getCheckoutbyId
+};
