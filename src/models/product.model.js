@@ -1,8 +1,8 @@
-import { ObjectId } from 'mongodb';
-import { getDB } from '../config/mongodb.js';
-import { HttpStatusCode } from '../utilities/constants.js';
+import { ObjectId } from "mongodb";
+import { getDB } from "../config/mongodb.js";
+import { HttpStatusCode } from "../utilities/constants.js";
 
-const ProductCollectionName = 'products';
+const ProductCollectionName = "products";
 const getProducts = async () => {
   try {
     const result = await getDB()
@@ -66,7 +66,7 @@ const getSearchProduct = async (textSearch) => {
   try {
     await getDB()
       .collection(ProductCollectionName)
-      .createIndex({ name: 'text', desc: 'text' });
+      .createIndex({ name: "text", desc: "text" });
     const result = await getDB()
       .collection(ProductCollectionName)
       .find({ $text: { $search: textSearch } });
@@ -86,10 +86,22 @@ const createProduct = async (data) => {
     throw new Error(error);
   }
 };
+const deleteProduct = async (data) => {
+  try {
+    const uid = ObjectId(data);
+    const result = await getDB()
+      .collection(ProductCollectionName)
+      .deleteOne({ _id: uid });
+    return result;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
 export const productModel = {
   getProducts,
   getProductSingle,
   getProdutcsById,
   getSearchProduct,
   createProduct,
+  deleteProduct,
 };

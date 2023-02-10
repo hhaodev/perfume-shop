@@ -93,9 +93,60 @@ const changePassWord = async (req, res) => {
     });
   }
 };
+const getAllUser = async (req, res) => {
+  try {
+    const result = await userService.getAllUser();
+    res.status(HttpStatusCode.OK).json({
+      status: "success",
+      data: {
+        result,
+      },
+    });
+  } catch (error) {
+    res.status(HttpStatusCode.BAD_REQUEST).json({
+      status: "error",
+      data: error,
+    });
+  }
+};
+const updateUser = async (req, res) => {
+  try {
+    const result = await userService.updateUser(req.body);
+    res.status(HttpStatusCode.OK).json({
+      status: "success",
+      data: {
+        result,
+      },
+    });
+  } catch (error) {
+    res.status(HttpStatusCode.BAD_REQUEST).json({
+      status: "error",
+      data: error,
+    });
+  }
+};
+const deleteUser = async (req, res) => {
+  try {
+    const result = await userService.deleteUser(req.params.id);
+    res.status(HttpStatusCode.OK).json({
+      status: "success",
+      data: {
+        result,
+      },
+    });
+  } catch (error) {
+    res.status(HttpStatusCode.BAD_REQUEST).json({
+      status: "error",
+      data: error,
+    });
+  }
+};
 export const UserController = {
   createNewUser,
   login,
   getCurrentUser,
   changePassWord,
+  getAllUser,
+  updateUser,
+  deleteUser
 };

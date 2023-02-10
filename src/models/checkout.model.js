@@ -81,10 +81,22 @@ const updateCheckout = async (data) => {
     throw new Error(error);
   }
 };
+const deleteCheckout = async (data) => {
+  try {
+    const uid = ObjectId(data);
+    const result = await getDB()
+      .collection(ProductCollectionName)
+      .deleteOne({ _id: uid });
+    return result;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
 export const checkoutModel = {
   checkout,
   getCheckout,
   updateCheckout,
   getCheckoutUser,
   getCheckoutbyId,
+  deleteCheckout,
 };

@@ -6,9 +6,13 @@ router
   .route("/checkout")
   .post(checkoutController.checkout)
   .get(checkoutController.getCheckout) // get all checkout
-  .put(checkoutController.updateCheckout);
+  .put(checkoutController.updateCheckout)
 router
   .route("/checkout/current_checkout")
   .post(UserVerifyToken.verifyToken, checkoutController.getCheckoutUser); // get checkout for user
-router.route("/checkout/:id").get(checkoutController.getCheckoutbyId) // get checkout by id
+router
+  .route("/checkout/:id")
+  .get(checkoutController.getCheckoutbyId) // get checkout by id
+  .delete(checkoutController.deleteCheckout);
+
 export const checkoutRoute = router;

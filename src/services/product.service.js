@@ -43,6 +43,14 @@ const createProduct = (data) => {
     throw new Error(error);
   }
 };
+const deleteProduct = (data) => {
+  try {
+    const result = productModel.deleteProduct(data);
+    return result;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
 
 export const productService = {
   getProducts,
@@ -50,4 +58,5 @@ export const productService = {
   getProdutcsById,
   getSearchProduct,
   createProduct,
+  deleteProduct
 };

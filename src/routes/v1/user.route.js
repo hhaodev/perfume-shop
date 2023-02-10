@@ -14,7 +14,12 @@ router.route("/login").post(UserController.login);
 router
   .route("/current_user")
   .post(UserVerifyToken.verifyToken, UserController.getCurrentUser);
-router.route("/current_user/change_pass").post((req,res,next)=> {
+router.route("/users/:id").delete(UserController.deleteUser);
+router
+  .route("/users")
+  .get(UserController.getAllUser)
+  .post(UserValidation.createNewUser,UserController.createNewUser);
+router.route("/current_user/change_pass").post((req, res, next) => {
   bcrypt.hash(req.body.password, 10, function (error, hash) {
     if (error) {
       return next(error);
@@ -23,5 +28,5 @@ router.route("/current_user/change_pass").post((req,res,next)=> {
       next();
     }
   });
-},UserController.changePassWord);
+}, UserController.changePassWord);
 export const UserRoutes = router;

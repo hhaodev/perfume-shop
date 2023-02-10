@@ -40,11 +40,20 @@ const updateCheckout = async (data) => {
     throw new Error(error);
   }
 };
+const deleteCheckout = async (data) => {
+  try {
+    const result = await checkoutModel.deleteCheckout(data);
+    return result;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
 
 export const checkoutService = {
   checkout,
   getCheckout,
   updateCheckout,
   getCheckoutUser,
-  getCheckoutbyId
+  getCheckoutbyId,
+  deleteCheckout
 };

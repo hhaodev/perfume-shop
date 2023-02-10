@@ -66,10 +66,23 @@ const createProduct = async (req, res) => {
     });
   }
 };
+const deleteProduct = async (req, res) => {
+  try {
+    const result = productService.deleteProduct(req.params.id);
+    res.status(HttpStatusCode.OK).json({
+      data: result,
+    });
+  } catch (error) {
+    res.status(HttpStatusCode.BAD_REQUEST).json({
+      data: 'error',
+    });
+  }
+};
 export const productController = {
   getProducts,
   getProductSingle,
   getProdutcsById,
   getSearchProduct,
   createProduct,
+  deleteProduct
 };

@@ -63,10 +63,23 @@ const updateCheckout = async (req, res) => {
     });
   }
 };
+const deleteCheckout = async (req, res) => {
+  try {
+    const result = await checkoutService.deleteCheckout(req.params.id);
+    res.status(HttpStatusCode.OK).json({
+      data: result,
+    });
+  } catch (error) {
+    res.status(HttpStatusCode.BAD_REQUEST).json({
+      data: error,
+    });
+  }
+};
 export const checkoutController = {
   checkout,
   getCheckout,
   getCheckoutUser,
   updateCheckout,
-  getCheckoutbyId
+  getCheckoutbyId,
+  deleteCheckout,
 };

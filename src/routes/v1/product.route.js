@@ -9,5 +9,5 @@ router
   .post(productController.getProdutcsById); // Get list product by id
 router.route('/create_product').post(productController.createProduct);
 router.route('/products/search').get(productController.getSearchProduct);
-router.route('/products/:id').get(productController.getProductSingle);
+router.route('/products/:id').get(productController.getProductSingle).delete(productController.deleteProduct);
 export const ProductRoute = router;
