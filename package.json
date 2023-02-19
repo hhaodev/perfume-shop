@@ -21,7 +21,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "devDependencies": {
-    "nodemon": "^2.0.19"
+    "nodemon": "^2.0.20"
   },
   "author": "",
   "license": "ISC",

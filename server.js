@@ -27,7 +27,7 @@ const bootServer = () => {
   // app.use("/api/v1", orderRoute);
   app.listen(env.APP_PORT, env.APP_LOCALHOST, () => {
     console.log(
-      `Hello anhdev, I'm running at ${env.APP_LOCALHOST} : ${env.APP_PORT}/`
+      `Hello haodev, I'm running at ${env.APP_LOCALHOST} : ${env.APP_PORT}/`
     );
   });
 };
